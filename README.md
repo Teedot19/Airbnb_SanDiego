@@ -1,10 +1,10 @@
-# 🏡 Airbnb Analytics Engineering Project (San Diego)
+# Airbnb Analytics Engineering Project (San Diego)
 
 This project uses **dbt**, **Snowflake**, and **Tableau** to transform and analyze real-world Airbnb data for San Diego. The data is sourced from [Inside Airbnb](http://insideairbnb.com/get-the-data.html) and ingested into **Snowflake** for modeling and dashboarding.
 
 ---
 
-## 🚀 Project Overview
+## Project Overview
 
 The goal of this project was to build an **end-to-end analytics engineering pipeline** using the modern data stack:
 
@@ -15,7 +15,7 @@ The goal of this project was to build an **end-to-end analytics engineering pipe
   
 ---
 
-## 🧰 Tech Stack
+## Tech Stack
 
 | Tool      | Purpose                          |
 |-----------|----------------------------------|
@@ -26,7 +26,7 @@ The goal of this project was to build an **end-to-end analytics engineering pipe
 
 ---
 
-## 📂 Project Structure
+##  Project Structure
 
 ```
 airbnb-analytics-dbt/
@@ -40,7 +40,7 @@ airbnb-analytics-dbt/
 
 ---
 
-## 🔍 Key Metrics Modeled
+##  Key Metrics Modeled
 
 - 💵 **Average nightly price by neighborhood**
 - 🏘️ **Top revenue-generating neighborhoods**
@@ -85,7 +85,7 @@ Two **Tableau Public dashboards** were created to visualize revenue, pricing, oc
 1. **Revenue & Pricing Trends**
 2. **Demand & Occupancy Trends**
 
-👉 [View the Published Tableau Dashboards](https://public.tableau.com/views/AirbnbSanDiegoRevenueDemandandOccupancyTrends/RevenueandPricingTrends?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
+👉 [View the Published Tableau Dashboards](https://public.tableau.com/views/AirbnbSanDiegoBIReports/RevenueandPricingTrends?:language=en-GB&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
 
 ---
 
