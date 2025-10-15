@@ -92,15 +92,3 @@ Two **Tableau Public dashboards** were created to visualize revenue, pricing, oc
 ## 📦 Data Source
 
 - Public data from [Inside Airbnb – San Diego](http://insideairbnb.com/get-the-data.html)
-- Datasets used:
-  - `listings.csv.gz` – Metadata for each listing
-  - `calendar.csv.gz` – Daily availability and pricing
-  - `reviews.csv.gz` – Guest reviews and review dates
-
-  
-## ✅ Future Improvements
-
-- Add dbt macros for reusable logic
-- Schedule dbt models for automated runs
-- Automate data ingestion from Inside Airbnb (e.g., with Airflow or dbt jobs)
-- Expand Tableau dashboards with booking lead time and cancellation analysis
