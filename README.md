@@ -1,4 +1,4 @@
-# Airbnb Analytics Engineering Project (San Diego)
+# Airbnb Analytics Engineering Project
 
 This project uses **dbt**, **Snowflake**, and **Tableau** to transform and analyze real-world Airbnb data for San Diego. The data is sourced from [Inside Airbnb](http://insideairbnb.com/get-the-data.html) and ingested into **Snowflake** for modeling and dashboarding.
 
