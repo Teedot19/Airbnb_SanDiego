@@ -1,0 +1,175 @@
+version: 2
+
+sources:
+  - name: raw
+    database: AIRBNB_PROJECT
+    schema: raw
+    tables:
+      - name: listings
+      - name: calendar
+      - name: reviews
+
+models:
+  - name: stg_listings
+    description: Cleaned and renamed staging model for Airbnb listings
+    columns:
+      - name: listing_id
+        description: Unique ID for each listing
+        tests:
+          - not_null:
+              config:
+                severity: warn
+                description: "Listing ID is expected to be present for all reviews, but source data contains known nulls."
+          - unique
+
+      - name: listing_name
+        description: Name/title of the listing
+
+      - name: host_id
+        description: >
+          Host ID of the Airbnb listing, expected to be an integer. 
+          Some records in the raw data contain invalid values and will be cast to NULL.
+        tests:
+          - not_null:
+              config:
+                severity: warn
+                description: >
+                  Ensures every listing has a host ID. Nulls may indicate upstream data issues.
+
+      - name: host_name
+        description: Name of the host
+
+      - name: host_is_superhost
+        description: Whether the host is designated as a superhost
+
+      - name: host_identity_verified
+        description: Whether the host's identity has been verified
+
+      - name: host_since
+        description: Date the host joined the platform
+
+      - name: host_response_rate
+        description: Response rate of the host to guest messages (percentage)
+
+      - name: host_listings_count
+        description: Number of listings associated with the host
+
+      - name: neighbourhood_cleansed
+        description: Standardized neighborhood name for easier grouping
+
+      - name: latitude
+        description: Latitude coordinate of the listing
+
+      - name: longitude
+        description: Longitude coordinate of the listing
+
+      - name: room_type
+        description: Type of room offered (e.g., Entire home/apt, Private room)
+        tests:
+          - accepted_values:
+              values: ['Entire home/apt', 'Private room', 'Shared room', 'Hotel room']
+
+      - name: property_type
+        description: Type of property (e.g., Apartment, House, Condo)
+
+      - name: accommodates
+        description: Maximum number of guests the listing can accommodate
+
+      - name: bathrooms
+        description: Number of bathrooms in the listing
+
+      - name: bedrooms
+        description: Number of bedrooms in the listing
+
+      - name: beds
+        description: Number of beds available in the listing
+
+      - name: amenities
+        description: Comma-separated list of amenities provided
+
+      - name: price
+        description: Nightly price of the listing in USD
+
+      - name: minimum_nights
+        description: Minimum number of nights required per booking
+
+      - name: availability_365
+        description: Number of days the listing is available per year
+
+      - name: number_of_reviews
+        description: Total number of reviews for the listing
+
+      - name: last_review
+        description: Date of the most recent review
+
+      - name: reviews_per_month
+        description: >
+          Monthly average review count per listing. Cast to float. Some raw values may be invalid.
+
+      - name: review_scores_rating
+        description: Average rating score based on guest reviews
+
+  - name: stg_calendar
+    description: Cleaned and typed staging model for calendar-based availability and pricing
+    columns:
+      - name: listing_id
+        description: Airbnb listing ID
+        tests:
+          - not_null
+
+      - name: calendar_date
+        description: Date of availability and pricing
+        tests:
+          - not_null
+
+      - name: is_available
+        description: Whether the listing is available on that day
+
+      - name: price
+        description: Price listed for that date (before adjustments)
+
+      - name: adjusted_price
+        description: Final adjusted price for that date
+
+      - name: minimum_nights
+        description: Minimum nights required for that date
+
+      - name: maximum_nights
+        description: Maximum nights allowed for that date
+  - name: stg_reviews
+    description: Cleaned and typed staging model for listing reviews
+    columns:
+      - name: review_id
+        description: Unique ID for the review
+        tests:
+          - not_null:
+              config:
+                severity: warn
+                description: "Review ID is expected to be present for all reviews, but source data contains known nulls."
+          - unique
+
+      - name: listing_id
+        description: Airbnb listing ID the review belongs to
+        tests:
+          - not_null:
+              config:
+                severity: warn
+                description: "Listing ID is expected to be present for all reviews, but source data contains known nulls."
+
+      - name: review_date
+        description: Date the review was posted
+        tests:
+          - not_null:
+              config:
+                severity: warn
+                description: "Review date is expected to be present for all reviews, but source data contains known nulls."
+
+
+      - name: reviewer_id
+        description: Unique ID of the reviewer
+
+      - name: reviewer_name
+        description: Name of the reviewer
+
+      - name: comments
+        description: Free text comments from the reviewer
